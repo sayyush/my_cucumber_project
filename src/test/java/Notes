@@ -1,0 +1,5 @@
+    To type the test cases we use 'Gherkin Language'
+            The keywords are:  x) Given: It is used for pre-condition
+                               y) When: It is used for actions(Requests...)
+                               z) Then: It is used for output(Assertion...)
+                               t) And:  It is used for multiple usage of Given, When and Then
