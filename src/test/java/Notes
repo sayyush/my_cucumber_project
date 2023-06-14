@@ -3,3 +3,40 @@
                                y) When: It is used for actions(Requests...)
                                z) Then: It is used for output(Assertion...)
                                t) And:  It is used for multiple usage of Given, When and Then
+
+
+  # All feature files must begin with "Feature" keyword
+     #  We use "Scenario":to create test cases/test scenarios
+     # Each line under Scenario : is called as STEP
+     # Each step must begin with GHERKIN language - Given , And,  When, Then , But, *
+     # Technically we can use any of these keyword in any step, but we should follow the best practice.
+     # eger de then o, then bu, then su diye art arda yazarsak technically sorun degil ama anlamsiz.
+     # BEST PRACTICE : "Given" for pre conditions in the first steps.
+     #                 "And" and "When" in the middle.
+     #                 "Then" in the verifications.
+     #                  "But" and "*" is not used a lot
+     #                  "*" : ANY
+   # STEPS FOR CUCUMBER AUTOMATION :
+   # 1. CREATE FEATURE FILE AND ADD TEST STEPS
+   # 2. CREATE STEP DEFINITIONS AND ADD JAVA CODE
+
+
+   // Feature file dan run yapmiyoruz, sadece runner class'da run yapiyoruz.
+
+**********  CUCUMBER KURULUMU *************
+- Cucumber Page Object Model icin olusturdugumuz klasorler :
+  pages -> page objeler cin (registirationPage, homePage, vendorPage ...)
+  runners -> test caseleri run etmek, raporlar eklemek, feature file ile step definitions lari birlestir icin
+  stepdefinitions -> java kodlari
+  utilities -> reusable metotlar, driver, configreader, ...
+- Cucumber feature klasoru
+  Tum feature file lar bu klasore gider
+  Tum test caseler gherkin dilinde bu klasorde yazilir.
+-------- ADIMLAR -------------
+1. Feature file olustur :firstfeature_file.feature
+2. Runner class ini run et
+3. Console dan missing step definitions lari kopyala
+4. stepdefinitions klasorunde GoogleStepDefs class i olustur ve oraya yapistir.
+
+*** Java kodlari "feature file daki siralamaya gore calisir".
+*** Her Step icin bir tane java kodu yazilmali.
