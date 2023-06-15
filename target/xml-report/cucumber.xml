@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="17.345" tests="1" skipped="0" failures="1" errors="0">
-<testcase classname="google search feature - this describe the name of this feature file" name="TC_02_porcelain_tea_pot_search" time="17.124">
-<failure/>
+<testsuite name="Cucumber" time="45.961" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Medunna Sign In" name="TC01_Sign_In - Example #1.1" time="24.097">
 <system-out><![CDATA[
-Given user is on the google home page.......................................passed
-And user search for porcelain_tea_pot.......................................passed
-Then verify the page title contains porcelain_tea_pot.......................passed
-Then close the application..................................................undefined
+Given user navigates to "https://www.medunna.com/"..........................passed
+When user clicks on icon....................................................passed
+And user clicks on sign in link.............................................passed
+And capture screenshot......................................................passed
+And user enters username "mark_twain" and "Mark.123"........................passed
+And user clicks on sign in  submit button...................................passed
+Then close the application..................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Medunna Sign In" name="TC01_Sign_In - Example #1.2" time="21.673">
+<system-out><![CDATA[
+Given user navigates to "https://www.medunna.com/"..........................passed
+When user clicks on icon....................................................passed
+And user clicks on sign in link.............................................passed
+And capture screenshot......................................................passed
+And user enters username "john_doe" and "John.123"..........................passed
+And user clicks on sign in  submit button...................................passed
+Then close the application..................................................passed
 ]]></system-out>
 </testcase>
 </testsuite>

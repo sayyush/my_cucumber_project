@@ -15,14 +15,7 @@ public class GoogleStepDefs {
 //    Runner Class, feature file lar ile step definitions i birbiriyle baglar.
     GooglePage googlePage = new GooglePage();
 
-    @Given("user is on the google home page")
-    public void user_is_on_the_google_home_page() {
-        Driver.getDriver().get(ConfigReader.getProperty("google_url"));
-//        try{
-//            googlePage.popUpAccept.click();//If there is a pop up on google clicking
-//        }catch (Exception e){
-//        }
-    }
+
 
     @Given("user search for iPhone")
     public void user_search_for_i_phone() {
@@ -34,10 +27,7 @@ public class GoogleStepDefs {
         Assert.assertTrue(Driver.getDriver().getTitle().contains("iPhone"));
     }
 
-    @Then("close the application")
-    public void close_the_application() {
-        Driver.closeDriver();
-    }
+
 
     @Given("user search for porcelain_tea_pot")
     public void user_search_for_porcelain_tea_pot() {
@@ -50,14 +40,14 @@ public class GoogleStepDefs {
     }
 
 
-    @Given("user navigates to {string}")
-    public void user_navigates_to(String string) {
-        Driver.getDriver().get(string);
-        try {
-            googlePage.popUpAccept.click();//If there is a pop up on google clicking
-        } catch (Exception e) {
-        }
-    }
+//    @Given("user navigates to {string}")
+//    public void user_navigates_to(String string) {
+//        Driver.getDriver().get(string);
+//        try {
+//            googlePage.popUpAccept.click();//If there is a pop up on google clicking
+//        } catch (Exception e) {
+//        }
+//    }
 
     @Given("user search for {string}")
     public void user_search_for(String string) {
