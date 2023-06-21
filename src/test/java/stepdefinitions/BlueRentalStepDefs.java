@@ -115,11 +115,9 @@ public class BlueRentalStepDefs {
    brHomePage.logOut.click();
    WaitUtils.waitFor(1);
    brHomePage.OK.click();
-
   }
 
  }
-
  @And("test fails")
  public void testFails() {
   assertTrue(false);

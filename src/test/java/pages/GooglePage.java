@@ -7,7 +7,8 @@ import utilities.Driver;
 
 public class GooglePage {
 
-    public GooglePage(){PageFactory.initElements(Driver.getDriver(),this);}
+    public GooglePage(){
+        PageFactory.initElements(Driver.getDriver(),this);}
 
     @FindBy(name = "q")
     public WebElement searchBox;

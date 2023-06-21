@@ -1,12 +1,54 @@
-    To type the test cases we use 'Gherkin Language'
-            The keywords are:  x) Given: It is used for pre-condition
-                               y) When: It is used for actions(Requests...)
-                               z) Then: It is used for output(Assertion...)
-                               t) And:  It is used for multiple usage of Given, When and Then
+
+*************** CUCUMBER Framework *****************
+Cucumber BDD(behaviour driven development) (davranis(fonksiyon, user storylar) tabanli gelistirme) yaklasimi icin kullanilmakta
+olan acik kaynak kodlu bir kutuphanedir.
+@ Neden Cucumber?
+- Cucumber TDD(Test Driven Development) test odakli gelistirmeye izin verir, cunku Cucumber ile Junit veya TestNG kullanabiliriz.
+- Cucumber is icin onemlidir, cunku anlasilabilir ve harika raporlara sahiptir.
+- Cucumber, teknik olmayan (non-technical) kisileri ve teknik kisileri bir birine baglar.
+- Developer veya team lead gibi teknik elemanlar da bazen testerlarin yaptigini anlamayabilir.
+- Gherkin language, onlarinda testlerimizi anlamalarini kolaylastirir.
 
 
-  # All feature files must begin with "Feature" keyword
+
+
+**********  CUCUMBER KURULUMU *************
+1.File > New > Project > naming(ismini yaz) > Java > Maven > Create
+2.dependencies ekliyoruz : Selenium Java(), webdrivermanager(apini kullanicaz),
+                         cucumber java(framework olusturmak icin), cucumber junit(annotationlari kullanabilmemiz icin,
+                         junit hizlidir, hemde Runner class'da @RunWith(Cucumber.class)<== bu junitden geliyor o yuzden..
+                         Her birinin son versiyonunu almali, yada sirker veriyor.
+3.<dependencies>  buraya dependency eklemeli     </dependencies>  kirmizilik olursa sag tarafta Maven'i refresh yada upload yaparsan duezelir.
+4. src > test > java sag click new package > utilities
+                              new package > pages
+                              new package > runners
+                              new package > stepdefinitions
+5. projeye sag click New > File >File configuration.properties(bunun icine data koymak icin mesela browser:chrome ... )
+6. utilities > New > Java Class > Driver, ConfigReader , ExcelUtils, Reusablemethods....(utility'leri testng den aldik genellikle)
+7. test > new > Direcotry > resources    (bunu yazdiginda alttan oneri cikiyorsa onu tikla      resoruces kirmizi yesil pembe renki bir dosya olmaldir)
+                                         egerde o renkler yoksa : resources > Mark Directory as > Test Resources Root a tikla
+8. resources > new > directory > features(cucumber da yazdigimiz test senaryolarini yazdigimiz yer olacak)
+9. ilk feature dosyamizi olusturalim : bu dosya bizim java kodu olmayan test senaryolarini iceren feature file;lardan olusan bir dosyadir.
+   Ve isminin sonunda " .feature" eklenmelidir.
+   features > New > File > firstfeaturefile.feature   rengi yesil olmaldir dosyanin, cucumber dilimi gibi, yani cucumber plugini kurdunuz demektir,
+                                                      rengi gri ise son adimimizi gerceklesitrmemiz gerektir,plugin eklemek.
+10 . cucumber plugins intelliJ'e ekle
+                      File > Settings > Plugins > Marketplace > Cucumber for Java > install
+                                                                Gherkin  nida install etmelidir.
+                                                                bazen intellij'i kapatip acmali bazen olmuyorsa.
+
+**************** PROJE OLUSTURULDU *****************
+
+
+
+
+
+
+  feature file icinde:
+     # All feature files must begin with "Feature" keyword
+     # Her bir file da, yanliz bir "Feature" kullanilmalidir.
      #  We use "Scenario":to create test cases/test scenarios
+     # File da birden fazla "Scenario" kullanilabilir.
      # Each line under Scenario : is called as STEP
      # Each step must begin with GHERKIN language - Given , And,  When, Then , But, *
      # Technically we can use any of these keyword in any step, but we should follow the best practice.
@@ -20,23 +62,47 @@
    # 1. CREATE FEATURE FILE AND ADD TEST STEPS
    # 2. CREATE STEP DEFINITIONS AND ADD JAVA CODE
 
+ To type the test cases we use 'Gherkin Language'
+            The keywords are:  x) Given: It is used for pre-condition   ilk adim
+                               y) When: It is used for actions(Requests...)
+                               z) Then: It is used for output(Assertion/ Verification...)  son adim
+                               t) And:  It is used for multiple usage of Given, When and Then
 
-   // Feature file dan run yapmiyoruz, sadece runner class'da run yapiyoruz.
 
-**********  CUCUMBER KURULUMU *************
+
+
+
+
 - Cucumber Page Object Model icin olusturdugumuz klasorler :
-  pages -> page objeler cin (registirationPage, homePage, vendorPage ...)
-  runners -> test caseleri run etmek, raporlar eklemek, feature file ile step definitions lari birlestir icin
-  stepdefinitions -> java kodlari
-  utilities -> reusable metotlar, driver, configreader, ...
+  pages               -> page objeler cin (registirationPage, homePage, vendorPage ...)
+  runners             -> test caseleri run etmek, raporlar eklemek, feature file ile step definitions lari birlestir icin
+  stepdefinitions     -> java kodlari
+  utilities           -> reusable metotlar, driver, configreader, ...
+
 - Cucumber feature klasoru
   Tum feature file lar bu klasore gider
   Tum test caseler gherkin dilinde bu klasorde yazilir.
+
+
+
+
+
 -------- ADIMLAR -------------
-1. Feature file olustur :firstfeature_file.feature
+1. Feature file olustur :firstfeature_file.feature   , her feature file'in arkasinda 1 tane java kod olmalidir.
 2. Runner class ini run et
 3. Console dan missing step definitions lari kopyala
-4. stepdefinitions klasorunde GoogleStepDefs class i olustur ve oraya yapistir.
+4.Sonra console da cikan undefined missing stepleri stepdefinitionsda olusturdugumuz class in icine yapistiriyoruz.
+5. Step definitions lara gerekli java kodlariniz yaz
 
+
+
+
+                             GENERAL NOTES
 *** Java kodlari "feature file daki siralamaya gore calisir".
 *** Her Step icin bir tane java kodu yazilmali.
+*** bir class'i runable etmek icin   " @RunWith annotation"   kullaniyoruz, onu Runner classin ustunde olusturuyoruz, bu sekilde design edilmis.
+*** Bosluk kucuk buyuk harflere dikkat etmeli
+***  Feature file dan run yapmiyoruz, sadece runner class'da run yapiyoruz.
+***  Testng ve Junit den farkli 2 tane package var Cucumber da : runners and stepdefinitions
+
+

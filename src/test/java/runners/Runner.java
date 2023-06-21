@@ -25,11 +25,9 @@ public class Runner {
 
 
 /*
-
 // Bu sinif Test caseleri RUN etmek icin kullanilir.
 // Ve konfigurasyonlar icin kullanilir.
-
-
+Runner Class, geature file ile step definitions i bir brine baglar.
                                                     // "@CucumberOptions " :it is used to add new plugins,
                                                     // path of the step definition and path of feature file   1 defa kullaniliyor
         features = "src/test/resources/features",  // PATH OF "FEATURES" FOLDER
