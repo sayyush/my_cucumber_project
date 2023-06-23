@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
                 "junit:target/xml-report/cucumber.xml",
                 "rerun:target/failedRerun.txt"
         },
-
         monochrome = false,
         features = "./src/test/resources/features",//PATH OF FEATURES FOLDER
         glue = {"stepdefinitions","hooks"},//PATH OF STEPDEFINITIONS FOLDER
@@ -37,3 +36,6 @@ Runner Class, geature file ile step definitions i bir brine baglar.
                                                // dryRun = false: RUN NORMAL. THIS IS DEFAULT VALUE
         tags = "@data_tables "      // tags koyarsan sadece porceleni calistiriyor.
  */
+
+//    "pretty",   > console bilgilerin okunakli olmasi    cok tercih edilen sudur.
+//      monochrome = true  > console bilgilerin okunakli olmasi

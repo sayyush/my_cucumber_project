@@ -16,3 +16,7 @@ public class GooglePage {
     @FindBy(xpath = "(//div[@class='QS5gu sy4vM'])[2]")   // Bazi ulkelere gidildiginde popUp sorunu olusabiliyor, onun icindir bu.
     public WebElement popUpAccept;
 }
+
+
+
+

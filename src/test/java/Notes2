@@ -1,0 +1,8 @@
+QUESTIONS AND ANSWERS
+
+1. Cucumber la bana bir sayfaya giris yapman icin gereken adimlari anlatirmisin from scratch?
+1.adim feature file a adimlari yazarim
+2. adim  Runner class i run ederim
+3. adim console da cikan missing stepleri stepdefinitions da bir class olusturup oraya yapistiririm
+   ve gerekli Java kodlari eklerim.
+   Oncelikle page package'da objeleri bulurum.

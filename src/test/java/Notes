@@ -87,7 +87,7 @@ olan acik kaynak kodlu bir kutuphanedir.
 
 
 
--------- ADIMLAR -------------
+                      -------- ADIMLAR -------------
 1. Feature file olustur :firstfeature_file.feature   , her feature file'in arkasinda 1 tane java kod olmalidir.
 2. Runner class ini run et
 3. Console dan missing step definitions lari kopyala
@@ -102,7 +102,123 @@ olan acik kaynak kodlu bir kutuphanedir.
 *** Her Step icin bir tane java kodu yazilmali.
 *** bir class'i runable etmek icin   " @RunWith annotation"   kullaniyoruz, onu Runner classin ustunde olusturuyoruz, bu sekilde design edilmis.
 *** Bosluk kucuk buyuk harflere dikkat etmeli
-***  Feature file dan run yapmiyoruz, sadece runner class'da run yapiyoruz.
-***  Testng ve Junit den farkli 2 tane package var Cucumber da : runners and stepdefinitions
+*** Feature file dan run yapmiyoruz, sadece runner class'da run yapiyoruz.
+*** Testng ve Junit den farkli 2 tane package var Cucumber da : runners and stepdefinitions
+*** Code lar feature filedaki siralamaya gore calisir, stepdefinition'da sira onemli degil.
+*** feature file da yazdigimiz stepler golgeli olmamali, bir eksik vardir demektir.
+*** Belirli Scenario lari calistirmak icin cucumber "tags" ler kullanilir.
+    tag ler Feature, Scenario, Scenario Outline , Examples kelimeleri ile birlikte kullanilabilir.
+*** tags = "@data_tables"   Runner class da boyle yazarsak hangi scenarioyu calistirmak istersek onu run eder sadece.
+***         @data_tables > bu da featurefile da Scenario keywordunun ustune yazilir/belirtilir.
+*** Runner class inda birden fazla tag eklemek istersem, => tags = "@smoke and @regression"   "and" her ikiside olmasi lazim ve ikisinin oldugu Scenario calisir
+                                                            tags = "@smoke or @regression"     "or" ikisinin birisi varsa calisir.(her ikisini calistirmak icin or kullan)  Javadaki gibi.
+***  dryRun = true : RUNS AND GENERATES ONLY MISSING STEP DEFS. dryRun = false: RUN NORMAL. THIS IS DEFAULT VALUE
+***  dryRun = true : diyince test case'leri calistirmiyor, sadece kontrol ediyor kacak gocek, tanimlanmamis step definition varmi diye.
+***  dryRun = true : dedigimizde browser falan acmiycak, search yapmiycak.
+***  dryRun = true : hizli bir sekilde zaman kaybi yasamamak icin kullanilir, yeni Scenario yada new step olusturdugumuzda kullanicaz.
+***  dryRun = false : dryRun yokmus gibi normal sekilde calisir.Yani tum adimlari tek tek browserda acar.
+***  dryRun = true : unutup true yaparak calistirmaya devam edersek, test passed yazarsa bu testin gecti anlamina gelmez,
+                     sadece eksik adim kalmadi anlamidir.
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+
+                   ----------- Parameterising   "String" ---------------
+    Scenario: TC02_tesla_search
+    And user search for "tesla"        sadece "" 'in icini degistirmemiz yeter, alttaki kod hepsinde ayni dinamik kod
+    Then verify the page title contains "tesla"
+
+        @Given("user search for {string}")
+        public void user_search_for(String string) {
+            googlePage.searchBox.sendKeys(string+Keys.ENTER);
+        }
+
+
+        @Then("verify the page title contains {string}")
+        public void verify_the_page_title_contains(String string) {
+            Assert.assertTrue(Driver.getDriver().getTitle().contains(string));
+
+        }
+
+                 --------------- Scenario Outline   ---------------
+Scenario Outline ayni Scenario i farkli degerlerle tekrar tekrar run etmek icin kullanilir.
+"<column_name>" ifadesi verileri parametre seklinde gondermek icin kullanilir.
+Examples, Scenario Outline dan sonra verileri girmek icin kullanilmalidir.
+Scenario Outline, Data Driven Test icin kullanilir.
+Scenario Outline, cucumber da cok onemlidir.
+
+@scenario_outline_1
+Feature: search_feature
+  Background: goes_to_google
+    Given user navigates to "https://www.google.com"
+
+  Scenario Outline: search_scenario
+#      "data"   --->>>> "<data>"
+    And user search for "<data>"
+    Then verify the page title contains "<data>"
+    Then close the application
+#      Examples must be used with scneario outline
+#      Examples is used to pass data
+    Examples: test data
+      | data              |
+      | bmw               |
+      | tesla             |
+      | mercedes          |
+      | apple             |
+      | iphone            |
+      | banana            |
+      | porcelain tea pot |
+
+
+       ---------- Why do you use Scenario Outline? ---------------
+To pass multiple different data
+To make the steps reusable
+To make the code shorter and cleaner
+Scenario Outline is especially useful for running with multiple data for the same scenarios.
+Search item where item = Tesla, Honda, Nissan,…
+Create reservation with different user info where user info ={name=Jim,id=1},
+{name=John,id=10},{name=Sam,id=80},…
+
+
+
+---------------------- Cucumber HMTL reports -------------------
+We need to add reports plugin in the Runner class to get the reports
+We can get html, json, or junit reports
+The most important report for testers is HTML reports
+Add below to the runner class:
+
+ plugin = {
+                "pretty",                                    // raporlarin daha okunakli olmasi icin
+                "html:target/default-cucumber-reports.html",
+                "json:target/json-reports/cucumber.json",
+                "junit:target/xml-report/cucumber.xml",
+                "rerun:target/failedRerun.txt"
+        },
+    monochrome = true     // raporlarin console da okunakli sekilde cikmasi icin
+// RAPOR detayini gormek icin : target > default-cucumber-reports.html > sag click Open in > Browser  > Chrome
+// Rapor dosyasina gitmek icin : target > default-cucumber-reports.html > sag click Open in > Explorer
+// html report browserda acilan bir dosyadir. en cok tercih edilendir.
+json ve xml uzerine cift tiklayip acabiliyorsun ama bunlar cok okunakli degil.
+
+
+   ------------------- Data Tables  ------------------
+   Scenario outline kadar kolay, kullanilisli, meshur  olmasada  bilinmesi gerekn seydir. Kullanimi zordur.
+|  <== pipe denir bu cizginin adina
+List Map  falan kullaniliyor kod kisminda.
+
+
+
+
+
+
+
+
 
 

@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="0.189" tests="0" skipped="0" failures="0" errors="0">
+<testsuite name="Cucumber" time="20.07" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="data_tables" name="TC_01_customer_login_test" time="19.878">
+<system-out><![CDATA[
+Given user navigates to "https://www.bluerentalcars.com/"...................passed
+When user clicks on login button............................................passed
+And user enters username and password.......................................passed
+And user clicks on login submit button......................................passed
+Then verify the login is successful.........................................passed
+When capture screenshot.....................................................passed
+And user logs out the application...........................................passed
+And close the application...................................................passed
+]]></system-out>
+</testcase>
 </testsuite>

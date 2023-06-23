@@ -9,7 +9,8 @@ Feature: google search feature - this describe the name of this feature file
     And user search for iPhone
     Then verify the page title contains iPhone
     Then close the application
-
+#  Then close the application => bu durumda ustteki ve alttaki senaryoyu ayri sayfa acarak yapiyor,
+#  egerde close stepini kapatirsan ayni sayfadan 2. urunu arar.
 
   @porcelain_tea_pot
   Scenario: TC_02_porcelain_tea_pot_search
