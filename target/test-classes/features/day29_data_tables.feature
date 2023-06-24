@@ -9,6 +9,7 @@ Feature: data_tables
       | username                      | password  |
       | sam.walker@bluerentalcars.com | c!fas_art |
     And user clicks on login submit button
+    And test fails
     Then verify the login is successful
     When capture screenshot
     And user logs out the application

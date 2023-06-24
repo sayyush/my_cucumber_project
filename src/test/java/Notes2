@@ -1,8 +1,33 @@
 QUESTIONS AND ANSWERS
 
 1. Cucumber la bana bir sayfaya giris yapman icin gereken adimlari anlatirmisin from scratch?
-1.adim feature file a adimlari yazarim
+1. adim feature file a adimlari yazarim
 2. adim  Runner class i run ederim
 3. adim console da cikan missing stepleri stepdefinitions da bir class olusturup oraya yapistiririm
    ve gerekli Java kodlari eklerim.
    Oncelikle page package'da objeleri bulurum.
+
+
+
+2. What is the difference between dependency and plugin?
+- Plugin is more simple than dependency, and it is similar to dependency, but plugins are used to add extra FUNCTIONALITY, not extra tool,not extra api.
+- For example, cucumber dependency gave us a cucumber api, but SUREFIRE AND FAILSAFE plugin are going to add parallel testing
+  capability. Normal Cucumber does not have parallel testing capability.
+- Dependency is giving you full api, for example, selenium dependency gives you lots of classes, methods that you can do
+  via application automation.
+
+DEFINITIONS:
+Dependency : Provides set of classes. For example , selenium dependency provides multiple classes such as Actions,
+ JavascriptExecutor, findElements,... Selenium dependency is a bunch of ready classes and method.
+
+Plugins : Provides a feature that is limited. it provides the extra functionality during the execution. For example,
+ Surefire - plugin enables prarallel execution during the test execution.
+
+
+
+  Failsafe plugin
+- MAKES THE FAILURE SAFE DURING PARALLEL TESTING.
+  IF ONE BROWSER FAILS, OTHER PARALLEL TEST CASES CONTINUE TO EXECUTE
+
+   Surefire plugin
+- RESPONSIBLE FOR PARALLEL TESTING

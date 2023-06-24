@@ -1,4 +1,4 @@
-@parametrizing1
+@parametrizing1 @test_runner
 Feature: search_feature
 
   Background: user_goes_to_google

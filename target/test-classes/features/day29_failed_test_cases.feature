@@ -27,3 +27,5 @@ Feature: failed_test_case
     When capture screenshot
     And user logs out the application
     And close the application
+
+
