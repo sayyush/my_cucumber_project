@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="classes" thread-count="3">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/TechProEd/Desktop/132 Selenium/mycucumberproject/src/test/java/testng_tests">
+        <classes>
+            <class name="testng_tests.TitleTest_Chrome">
+                <methods>
+                    <include name="titleTest"/>
+                </methods>
+            </class>
+            <class name="testng_tests.TitleTest_Edge">
+                <methods>
+                    <include name="titleTest"/>
+                </methods>
+            </class>
+            <class name="testng_tests.TitleTest_FireFox">
+                <methods>
+                    <include name="titleTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
