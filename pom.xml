@@ -61,6 +61,16 @@
             <version>1.13.0</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
 
@@ -86,6 +96,7 @@
                     </includes>
                 </configuration>
             </plugin>
+
             <!--            2. RESPONSIBLE FOR PARALLEL TESTING -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -107,6 +118,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
+
             <!--            3. GENERATES REPORTS AFTER TEST EXECUTION WITH MAVEN-->
             <plugin>
                 <groupId>net.masterthought</groupId>

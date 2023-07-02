@@ -195,7 +195,7 @@ The most important report for testers is HTML reports
 Add below to the runner class:
 
  plugin = {
-                "pretty",                                    // raporlarin daha okunakli olmasi icin
+                "pretty",                     // raporlarin daha okunakli olmasi icin
                 "html:target/default-cucumber-reports.html",
                 "json:target/json-reports/cucumber.json",
                 "junit:target/xml-report/cucumber.xml",
@@ -214,6 +214,148 @@ json ve xml uzerine cift tiklayip acabiliyorsun ama bunlar cok okunakli degil.
 List Map  falan kullaniliyor kod kisminda.
 
 
+   -------------- HOOKS ---------------
+   What is hooks?
+- Hooks is a class that runs Before or After each Scenario or Scenario Outline.
+   Why do you use?
+- I use hooks class to generate the reports with screenshot.
+-  My after method especially helpful to capture screenshot when a Scenario fails automatically.
+    What is in it?
+- It has Before and After methods. I have reports method to capture the screenshot.
+
+- class i run ettikten sonra   : target > default-cucumber-reports.html > Open in > browser chrome'da
+   ac orda raporlar var.
+
+
+   --------------- Cucumber raporlarini Cloud a ekleme --------------
+   fail testi run ettikten sonra console'da en altta cerceve icerisinde :
+ Share your Cucumber Report with your team at :https://reports.cucumber.io .......  sonra alttaki adimlar  ;
+ 1. resources dosyasinin altinda " cucumber.properties" file i olustur;
+ 2. dosya icine  ekle : cucumber.publish.enabled=true
+ 3. Testi calistir.  Sonra yine en altta console'da  View your Cucumber Report at : link veriyor, ve tikla.
+    Bu sekilde cucumber html raporu cloud a yuklenecektir. Fakat Github ile giris yapilmazsa
+    24 saat icinde silinecektir. Bu yuzden Github ile giris yapmali.
+ 4. Login with Github a tikla => Authorize SmartBear
+ 5. Name : kutunun icine rapora isim ver ve Create new  Collection
+ 6. Tokeni cucumber.properties dosyaya ekle
+ 7. Testi tekrar calistir. Coleections klosorunde raporlar olusacaktir.
+  Bu ayari 1 kere yapiyoruz sonra raporlar hep oraya gitmis olacak.
+
+
+
+   -------------- Excel -------------------
+1)  Excel automatin test verilerini almak icin kullanilir.
+  Cucumber da degisik sekillerle test datalari alinabilir :
+  > Scenario Outline (cucumber)
+  > DataTables(cucumber)
+  > Excel(cucumber,testng,junit) Apache poi dependency si gerekli
+
+          <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+          <dependency>
+              <groupId>org.apache.poi</groupId>
+              <artifactId>poi</artifactId>
+              <version>5.2.3</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+          <dependency>
+              <groupId>org.apache.poi</groupId>
+              <artifactId>poi-ooxml</artifactId>
+              <version>5.2.3</version>
+          </dependency>
+2) configuration.properties dosyasina url i ekle :   br_url=https://www.bluerentalcars.com/   (bu sadece ornek)
+3) excel_automation diye bir feature file olustur, ve oyle devam et.
+4) stepdefinitions olustur (ExcelStepDefs)
+5) homepage loginPage olustur.
+
+
+
+
+   ------------ Parallel testing --------------
+ Ayni anda birden fazla browser da test caseleri calistirma islemine parallel test denir.
+1) Oncelikle pom.xml de cucumber ile parallel testi mumkun kilan plugins leri koyabiliriz.
+   * Surefire plugin --> parallel test icin
+   * Failsafe plugin --> parallel testlerde testin fail olmasi durumunda diger testlerin calismaya devam etmesini saglar.
+   * cucumber- report --> extra renkli gelismis raporlar verir
+
+    <!--    AFTER DEPENDENCIES BEFORE PROJECT-->
+    <build>
+        <plugins>
+            <!--        1. MAKES THE FAILURE SAFE DURING PARALLEL TESTING.
+            IF ONE BROWSER FAILS, OTHER PARALLEL TEST CASES CONTINUE TO EXECUTE-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <skipTests>false</skipTests>
+                    <includes>
+                        <include>**/runners/*TestRunner*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!--            2. RESPONSIBLE FOR PARALLEL TESTING -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <parallel>classes</parallel>
+                    <forkMode>perthread</forkMode>
+                    <threadCount>3</threadCount>
+                    <forkCount>false</forkCount>
+                    <argLine>-Duser.language=en</argLine>
+                    <argLine>-Xmx1024m</argLine>
+                    <argLine>-XX:MaxPermSize=256m</argLine>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <useFile>false</useFile>
+                    <includes>
+                        <include>**/runners/*TestRunner*.java</include>
+                    </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <!--            3. GENERATES REPORTS AFTER TEST EXECUTION WITH MAVEN-->
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>cucumber-framework</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <!-- <cucumberOutput>${project.build.directory}</cucumberOutput>-->
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <param>**/json-reports/*.json</param>
+                            </jsonFiles><classificationFiles>->
+                            <param>sample.properties</param>
+                            <param>other.properties</param>
+                        </classificationFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+2) Sonra birden fazla Runners olusturup(TestRunner,RegressionRunner,SmokeRunner), bu runner lari ayni anda maven commend ile calistirilarak paralel test yapilir.
+3) intellijdeki  Terminalden maven projesini calistirmak icin : mvn clean verify + Enter  / mvn clean install + Enter
+   Egerde laptoptaki cmd, powershell, terminalde calistirmak isterseniz, bu durumda projenin icine girmemiz lazim:
+   terminali ac ;
+                 mesela mycucumberproject projesinin ustune tikla copyPath > Absolute Path yap
+                 terminalde : cd C:\Users\ROG\IdeaProjects\mycucumberproject\src     (cd: change directory demektir)
+                 ondan sonra  mvn clean verify + Enter
+
+# Testerlar her gun parallel test yapmazlar, ne zaman ki regression test yaparlarsa 5 6 saatlik o zaman parallel test iyidir.
 
 
 

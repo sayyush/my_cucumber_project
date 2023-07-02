@@ -2,9 +2,12 @@ pages\BRLoginPage.class
 utilities\WaitUtils$1.class
 stepdefinitions\CommonStepDefs.class
 utilities\ReusableMethods$1.class
+testng_tests\TitleTest_Chrome.class
 utilities\Driver$1.class
 pages\GooglePage.class
+stepdefinitions\GridStepDefs.class
 stepdefinitions\ExcelStepDefs.class
+testng_tests\TitleTest_Edge.class
 runners\SmokeTestRunner.class
 runners\RegressionTestRunner.class
 utilities\ReusableMethods.class
@@ -14,12 +17,14 @@ pages\BRHomePage.class
 utilities\ReusableMethods$2.class
 runners\Runner.class
 runners\TestRunner.class
+testng_tests\TitleTest_FireFox.class
 utilities\Driver.class
 runners\FailedRunner.class
 stepdefinitions\BlueRentalStepDefs.class
 utilities\ExcelUtils.class
 utilities\JSUtils.class
 pages\MedunnaPage.class
+runners\GridRunner.class
 utilities\ConfigReader.class
 utilities\MediaUtils.class
 stepdefinitions\GoogleStepDefs.class

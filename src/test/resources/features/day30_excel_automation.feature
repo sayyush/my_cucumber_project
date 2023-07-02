@@ -6,6 +6,7 @@ Feature: excel_automation
 #    log out
 #    closes the driver
     Given user tries to login as "customer_info"
+    # customer_info - excel deki sayfa ismidir
     Then close the application
   @excel_admin
   Scenario: TC02_login_admin

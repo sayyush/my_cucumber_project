@@ -25,20 +25,21 @@ public class ExcelStepDefs {
         dataList= excelUtils.getDataList();//getDataList returns all of the data in that sheet
 
         for (Map<String,String> eachData : dataList) {  // excel sheetde 4 tane var o yuzden loop kullaniyoruz
+            // Ana sayfaya git
             Driver.getDriver().get(ConfigReader.getProperty("br_url"));
             brHomePage = new BRHomePage();
             brLoginPage = new BRLoginPage();
-            WaitUtils.waitFor(1);
+            WaitUtils.waitFor(3);
             brHomePage.homeLoginLink.click();//clicking home page login link to navigate login page
-            WaitUtils.waitFor(1);
+            WaitUtils.waitFor(3);
             brLoginPage.userEmail.sendKeys(eachData.get("username"));//WE GET THE DATA FROM EXCEL SHEET
-            WaitUtils.waitFor(1);
+            WaitUtils.waitFor(3);
             brLoginPage.userPassword.sendKeys(eachData.get("password"));//WE GET THE DATA FROM EXCEL SHEET
-           WaitUtils.waitFor(1);
+           WaitUtils.waitFor(3);
             brLoginPage.loginSubmitButton.click();
-            WaitUtils.waitFor(1);
+            WaitUtils.waitFor(3);
             ReusableMethods.verifyElementDisplayed(brHomePage.userID);
-            WaitUtils.waitFor(1);
+            WaitUtils.waitFor(3);
 
             try {
                 MediaUtils.takeScreenshotOfTheEntirePage();

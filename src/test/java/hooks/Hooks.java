@@ -26,6 +26,7 @@ public class Hooks {
         if (scenario.isFailed()) {
             final byte[] screenshot;
             screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+                          //ekran goruntusu       file tipi         ekran goruntu adi
             scenario.attach(screenshot, "image/png", "screenshots");
             Driver.closeDriver();
         }
